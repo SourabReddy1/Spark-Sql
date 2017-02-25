@@ -1,8 +1,6 @@
 
 import java.util.*;
 import java.io.*;
-
-
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -21,13 +19,9 @@ import org.joda.time.chrono.AssembledChronology.Fields;
 import org.apache.spark.sql.types.StructType;
 
 public class CreateDsSchema {
-
-
-	
-	public static void main(String[] args) throws AnalysisException
+public static void main(String[] args) throws AnalysisException
  	{
-		
-		System.setProperty("hadoop.home.dir", "C:\\hadoop-winutils-2.6.0");
+	        System.setProperty("hadoop.home.dir", "C:\\hadoop-winutils-2.6.0");
 		SparkConf con=new SparkConf();
 		JavaSparkContext jsc=new JavaSparkContext("local[2]","hi-",con);
 		SQLContext sqlct=new SQLContext(jsc);
@@ -53,12 +47,5 @@ public class CreateDsSchema {
 		Dataset<Row> fin=sqlct.sql("select * from kmit");
 		fin.show();
 		dr.printSchema();
-		
-		
-		
-		
- 	}
-	
-	
-	
+  }
 }
