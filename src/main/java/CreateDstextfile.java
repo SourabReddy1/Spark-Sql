@@ -52,7 +52,7 @@ public static void main(String[] args) throws AnalysisException
 	SparkSession spark=SparkSession.builder().config("log4j.rootCategory", "WARN").getOrCreate();
 	//CreateDstextfile.person cp=new CreateDstextfile.person();
 	Encoder<person> pencoder=Encoders.bean(person.class);
-	JavaRDD<person> jp=spark.read().textFile("C:/Users/Sourab Reddy/Desktop/ex.txt").javaRDD().map(line->{ String parts[]=line.split(",");
+	JavaRDD<person> jp=spark.read().textFile("Spark-Sql/student.txt").javaRDD().map(line->{ String parts[]=line.split(",");
 	CreateDstextfile.person cp=new CreateDstextfile.person();
 	cp.setName(parts[0]);
 	cp.setAge(Integer.parseInt(parts[1].trim()));
