@@ -32,7 +32,7 @@ public class CreateDsSchema {
 		JavaSparkContext jsc=new JavaSparkContext("local[2]","hi-",con);
 		SQLContext sqlct=new SQLContext(jsc);
 		SparkSession spark=SparkSession.builder().config("log4j.rootCategory", "WARN").getOrCreate();
-		JavaRDD<String> jdd=spark.sparkContext().textFile("C:/Users/Sourab Reddy/Desktop/ex.txt",1).toJavaRDD();
+		JavaRDD<String> jdd=spark.sparkContext().textFile("Spark-Sql/student.txt,1).toJavaRDD();
 		String Stringschema="name age address";
 		List<StructField> fields=new ArrayList<>();
 		for(String fieldName: Stringschema.split(" "))
