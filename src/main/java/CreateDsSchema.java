@@ -27,21 +27,17 @@ public static void main(String[] args) throws AnalysisException
 		SQLContext sqlct=new SQLContext(jsc);
 		SparkSession spark=SparkSession.builder().config("log4j.rootCategory", "WARN").getOrCreate();
 		JavaRDD<String> jdd=spark.sparkContext().textFile("Spark-Sql/student.txt",1).toJavaRDD();
-		String Stringschema="name age address";
-		List<StructField> fields=new ArrayList<>();
-		for(String fieldName: Stringschema.split(" "))
-		{
-			StructField field=DataTypes.createStructField(fieldName, DataTypes.StringType, true);
-			fields.add(field);
-		}
-		StructType schema = DataTypes.createStructType(fields);
-		
+		StructType schema = DataTypes 
+				    .createStructType(new StructField[] { 
+				      DataTypes.createStructField("name", DataTypes.StringType, true), 
+				      DataTypes.createStructField("age", DataTypes.IntegerType, true), 
+				      DataTypes.createStructField("address", DataTypes.StringType, true), 
+				     }); 
 		JavaRDD<Row> jrd=jdd.map(l->{
 			String[] att=l.split(",");
-			return RowFactory.create(att[0],att[1],att[2]);
+			return RowFactory.create(att[0],Integer.parseInt(att[1]),att[2]);
 			
-		}
-				);
+		});
 		Dataset<Row> dr=spark.createDataFrame(jrd, schema);
 		dr.createOrReplaceTempView("kmit");
 		Dataset<Row> fin=sqlct.sql("select * from kmit");
