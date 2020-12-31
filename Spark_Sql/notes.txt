@@ -1,0 +1,5 @@
+Spark SQL uses SortAggregate or HashAggregate for grouping
+SortAggregation - Will sort the rows and then gather together the matching rows. O(n*log n)
+HashAggregation creates a HashMap using key as grouping columns where as rest of the columns as values in a Map.
+Spark SQL uses HashAggregation where possible(If data for value is mutable)
+Underlying Grouping algorithm
